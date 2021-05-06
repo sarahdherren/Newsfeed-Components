@@ -115,6 +115,8 @@ function articleMaker(titleData, dateData, firstPData, secondPData, thirdPData) 
   const article = document.createElement('div');
   article.classList.add('article');
 
+  const readBtn = document.createElement('button')
+  readBtn.textContent = 'READ'
   const title = document.createElement('h2');
   title.textContent = titleData;
   const date = document.createElement('p');
@@ -128,7 +130,13 @@ function articleMaker(titleData, dateData, firstPData, secondPData, thirdPData) 
   thirdP.textContent = thirdPData;
   const xpdButton = document.createElement('span');
   xpdButton.classList.add('expandButton')
-  xpdButton.textContent = '+';
+  xpdButton.textContent = 'Click to Expand';
+  article.appendChild(readBtn);
+
+  readBtn.addEventListener('click', (e) => {
+    article.classList.toggle('read');
+  });
+
   article.appendChild(title);
   article.appendChild(date);
   article.appendChild(firstP);
@@ -138,10 +146,17 @@ function articleMaker(titleData, dateData, firstPData, secondPData, thirdPData) 
 
   xpdButton.addEventListener('click', (e) => {
     article.classList.toggle('article-open');
-  })
+    article.classList.contains('article-open') ? xpdButton.textContent = 'Click to Close' : xpdButton.textContent = 'Click to Expand'
+    gsap.to('.article-open', {duration: 3, height: 415, ease: 'expo-out'})
+    gsap.to('div.article', {duration: 1, height: 50, ease: 'expo-out'})
+  });
+
+  
 
   return article
 }
+
+
 
 const articles = document.querySelector('.articles')
 
