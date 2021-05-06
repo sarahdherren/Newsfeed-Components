@@ -36,15 +36,19 @@ function menuMaker(array) {
   const menuBtn = document.querySelector('.menu-button');
   menuBtn.addEventListener('click', (e) => {
     menu.classList.toggle('menu--open');
+    gsap.to('.menu--open',{duration: 2, x: 350, ease: 'circ-out'});
+    gsap.to('div.menu', {duration: 1, x: -350, ease: 'circ-out'})
   })
 
   return menu;
 }
 
-menuMaker(menuItems)
+
+
+const buildMenu = menuMaker(menuItems)
 
 const header = document.querySelector('.header');
-header.appendChild(menuMaker(menuItems))
+header.appendChild(buildMenu)
 /*
   The 'menuMaker' takes an array of menu items as its only argument.
 
